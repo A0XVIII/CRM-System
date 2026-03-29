@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { addTodo } from "../api/taskAPI";
 
-export default function TodoForm() {
-  const [value, setValue] = useState(""); // хранение значения input
+export default function AddTodoForm({ updateTodos }) {
+  const [value, setValue] = useState("");
 
   const validateValue = (value) => {
     if (value.trim() === "") {
@@ -12,17 +13,21 @@ export default function TodoForm() {
       alert("Введите значение от 2 до 64 символов");
       return false;
     }
-    return true
+    return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateValue(value)) return;
 
-    //отправка на бэкенд
-    console.log('Отправлено', value)
+    try {
+      await addTodo({ title: value, isDone: false });
+      setValue("");
+      await updateTodos();
+    } catch (error) {
+      alert("Не удалось добавить задачу. Попробуйте еще раз");
+    }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <input

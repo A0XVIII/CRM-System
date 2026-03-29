@@ -1,9 +1,9 @@
 import "./App.css";
-import Task from "./components/TodoForm.jsx";
+import TodoPage from "./pages/TodoPage";
 function App() {
   return (
     <>
-      <Task />
+      <TodoPage />
     </>
   );
 }
