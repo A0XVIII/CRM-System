@@ -33,6 +33,14 @@ const TodoItem = (props) => {
 
   const handleAdmitClick = async () => {
     const newTitle = newTodoTitle;
+    if (newTitle.trim() === "") {
+      alert("Введите значение");
+      return;
+    }
+    if (newTitle.trim().length < 2 || newTitle.trim().length > 64) {
+      alert("Введите значение от 2 до 64 символов");
+      return;
+    }
     const originalTodo = todos.find((todo) => todo.id === id);
     const originalTitle = originalTodo.title;
 

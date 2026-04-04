@@ -14,7 +14,7 @@ const TodoList = ({
     <ul className="todo_list">
       {todos.map((todo) => (
         <TodoItem
-          className="todo__item"
+          className="todo_item"
           key={todo.id}
           {...todo}
           isEditing={editingTodoId === todo.id}
