@@ -22,13 +22,13 @@ export const addTodo = (todo) =>
     return res.json();
   });
 
-export const updateTodo = (todoId, newTodoTitle) =>
+export const updateTodo = (todoId, newTodoObject) =>
   fetch(`${BASE_URL}/todos/${todoId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(newTodoTitle),
+    body: JSON.stringify(newTodoObject),
   }).then((res) => {
     if (!res.ok) throw new Error("Ошибка при обновлении задачи");
     return res.json();
