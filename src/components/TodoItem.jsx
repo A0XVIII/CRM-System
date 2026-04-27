@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { validateTodoTitle } from "../utils/validateTodoTitle";
 import { updateTodo, deleteTodo } from "../api/taskAPI";
+import { CheckIcon } from "../assets/CheckIcon";
+import { CloseIcon } from "../assets/CloseIcon";
+import { EditIcon } from "../assets/EditIcon";
+import { DeleteIcon } from "../assets/DeleteIcon";
 
 const TodoItem = (props) => {
   const {
@@ -42,7 +46,7 @@ const TodoItem = (props) => {
       handleCloseClick();
       return;
     }
-
+    EditIcon;
     try {
       await updateTodo(id, {
         title: newTitle,
@@ -126,15 +130,7 @@ const TodoItem = (props) => {
             onClick={handleAdmitClick}
             type="button"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#e3e3e3"
-            >
-              <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
-            </svg>
+            <CheckIcon />
           </button>
           <button
             className="second"
@@ -144,15 +140,7 @@ const TodoItem = (props) => {
             onClick={handleCloseClick}
             type="button"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#e3e3e3"
-            >
-              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-            </svg>
+            <CloseIcon />
           </button>
         </>
       ) : (
@@ -172,9 +160,7 @@ const TodoItem = (props) => {
             onClick={() => handleEditClick(id)}
             type="button"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-            </svg>
+            <EditIcon />
           </button>
           <button
             className="second"
@@ -184,9 +170,7 @@ const TodoItem = (props) => {
             onClick={handleDeleteClick}
             type="button"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-            </svg>
+            <DeleteIcon />
           </button>
         </>
       )}

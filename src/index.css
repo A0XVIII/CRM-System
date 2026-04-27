@@ -165,8 +165,8 @@ body {
 
 .todo-item_edit-form {
   flex: 1;
+  flex-direction: column;
 }
-
 .todo-item_field-edit {
   width: 100%;
   padding: 8px 12px;
