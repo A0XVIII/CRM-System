@@ -1,9 +1,9 @@
 import "./App.css";
-import TodoPage from "./pages/TodoPage";
+import TodosPage from "./pages/TodosPage";
 function App() {
   return (
     <>
-      <TodoPage />
+      <TodosPage />
     </>
   );
 }

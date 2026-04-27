@@ -4,7 +4,7 @@ import AddTodoForm from "../components/AddTodoForm";
 import TodoList from "../components/TodoList";
 import TodoMenu from "../components/TodoMenu";
 
-const TodoPage = () => {
+const TodosPage = () => {
   const [todoCounts, setTodoCounts] = useState({
     all: 0,
     inWork: 0,
@@ -53,4 +53,4 @@ const TodoPage = () => {
   );
 };
 
-export default TodoPage;
+export default TodosPage;
