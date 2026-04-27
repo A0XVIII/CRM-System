@@ -23,6 +23,16 @@ body {
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  align-items: flex-start;
+}
+.todo form div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.todo form div input {
+  width: 100%;
 }
 
 .todo form input {
