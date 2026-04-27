@@ -1,26 +1,14 @@
 import { useState } from "react";
 import { addTodo } from "../api/taskAPI";
+import { validateTodoTitle } from "../utils/validateTodoTitle";
 
 export default function AddTodoForm({ updateTodos }) {
   const [todoTitle, setTodoTitle] = useState("");
   const [error, setError] = useState ("");
 
-  const validateValue = (value) => {
-    if (value.trim() === "") {
-      setError("Введите значение");
-      return false;
-    }
-    if (value.trim().length < 2 || value.trim().length > 64) {
-      setError("Введите значение от 2 до 64 символов");
-      return false;
-    }
-    setError("");
-    return true;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateValue(todoTitle)) return;
+    if (!validateTodoTitle(todoTitle, setError)) return;
 
     try {
       await addTodo({ title: todoTitle, isDone: false });

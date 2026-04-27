@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { validateTodoTitle } from "../utils/validateTodoTitle";
 import { updateTodo, deleteTodo } from "../api/taskAPI";
 
 const TodoItem = (props) => {
@@ -12,7 +13,7 @@ const TodoItem = (props) => {
     todos,
     setEditingTodoId,
   } = props;
-
+  const [error, setError] = useState("");
   const [newTodoTitle, setNewTodoTitle] = useState(title);
 
   useEffect(() => {
@@ -33,14 +34,7 @@ const TodoItem = (props) => {
 
   const handleAdmitClick = async () => {
     const newTitle = newTodoTitle;
-    if (newTitle.trim() === "") {
-      alert("Введите значение");
-      return;
-    }
-    if (newTitle.trim().length < 2 || newTitle.trim().length > 64) {
-      alert("Введите значение от 2 до 64 символов");
-      return;
-    }
+    if (!validateTodoTitle(newTitle, setError)) return;
     const originalTodo = todos.find((todo) => todo.id === id);
     const originalTitle = originalTodo.title;
 
@@ -122,6 +116,7 @@ const TodoItem = (props) => {
               value={newTodoTitle}
               onChange={onInput}
             />
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </form>
           <button
             className="first"

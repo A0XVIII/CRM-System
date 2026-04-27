@@ -91,7 +91,7 @@ body {
 
 .todo-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   background: #fff;
   border-radius: 12px;
@@ -101,6 +101,7 @@ body {
 
 .todo-item_checkbox {
   appearance: none;
+  margin-top: 8px;
   width: 22px;
   height: 22px;
   border: 2px solid #d2d2d2;
@@ -150,6 +151,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
 }
 
 .todo-item button.first {
