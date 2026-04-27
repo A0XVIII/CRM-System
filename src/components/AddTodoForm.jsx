@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addTodo } from "../api/taskAPI";
 
 export default function AddTodoForm({ updateTodos }) {
-  const [value, setValue] = useState("");
+  const [todoTitle, setTodoTitle] = useState("");
 
   const validateValue = (value) => {
     if (value.trim() === "") {
@@ -18,11 +18,11 @@ export default function AddTodoForm({ updateTodos }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateValue(value)) return;
+    if (!validateValue(todoTitle)) return;
 
     try {
-      await addTodo({ title: value, isDone: false });
-      setValue("");
+      await addTodo({ title: todoTitle, isDone: false });
+      setTodoTitle("");
       await updateTodos();
     } catch (error) {
       alert("Не удалось добавить задачу. Попробуйте еще раз");
@@ -31,10 +31,10 @@ export default function AddTodoForm({ updateTodos }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setTodoTitle(e.target.value)}
         type="text"
         placeholder="Добавьте задачу"
-        value={value}
+        value={todoTitle}
       />
       <button type="submit">Добавить задачу</button>
     </form>
