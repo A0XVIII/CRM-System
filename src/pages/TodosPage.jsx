@@ -24,7 +24,7 @@ const TodosPage = () => {
         completed: response.info.completed,
       });
     } catch (error) {
-      setTodos([]);
+      alert("Произошла ошибка! Попробуйте снова");
     }
   };
 
