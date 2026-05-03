@@ -7,13 +7,7 @@ import { EditIcon } from "../assets/EditIcon";
 import { DeleteIcon } from "../assets/DeleteIcon";
 
 const TodoItem = (props) => {
-  const {
-    className = "",
-    id,
-    title,
-    isDone,
-    updateTodos,
-  } = props;
+  const { className = "", id, title, isDone, updateTodos } = props;
   const [error, setError] = useState("");
   const [newTodoTitle, setNewTodoTitle] = useState(title);
   const [isEditing, setIsEditing] = useState(false);
@@ -37,7 +31,6 @@ const TodoItem = (props) => {
   const handleAdmitClick = async () => {
     const newTitle = newTodoTitle;
     if (!validateTodoTitle(newTitle, setError)) return;
-
     if (title === newTitle) {
       handleCloseClick();
       return;
@@ -47,7 +40,6 @@ const TodoItem = (props) => {
         title: newTitle,
         isDone: isDone,
       });
-
       handleCloseClick();
       await updateTodos();
     } catch (error) {
@@ -73,27 +65,26 @@ const TodoItem = (props) => {
 
   const handleToggleComplete = async (event) => {
     const newIsDone = event.target.checked;
-
     try {
       await updateTodo(id, {
         title: title,
         isDone: newIsDone,
       });
-
       await updateTodos();
     } catch (error) {
       await updateTodos();
     }
   };
 
-  const handleEditClick = (todoId) => {
+  const handleEditClick = () => {
     setIsEditing(true);
   };
+
   return (
     <li className={`todo-item ${className}`}>
       <input
         type="checkbox"
-        id={id}
+        id={`todo-checkbox-${id}`}
         checked={isDone}
         className="todo-item_checkbox"
         onChange={handleToggleComplete}
@@ -108,22 +99,19 @@ const TodoItem = (props) => {
               onChange={onInput}
             />
             {error && <p style={{ color: "red" }}>{error}</p>}
+            <button
+              className="first"
+              title="Подтвердить"
+              aria-label="Подтвердить"
+              type="submit"
+            >
+              <CheckIcon />
+            </button>
           </form>
-          <button
-            className="first"
-            title="Подтвердить"
-            aria-label="Подтвердить"
-            id={id}
-            onClick={handleAdmitClick}
-            type="button"
-          >
-            <CheckIcon />
-          </button>
           <button
             className="second"
             title="Закрыть"
             aria-label="Закрыть"
-            id={id}
             onClick={handleCloseClick}
             type="button"
           >
@@ -134,7 +122,7 @@ const TodoItem = (props) => {
         <>
           <label
             className={`todo-item_label ${isDone ? "completed" : ""}`}
-            htmlFor={id}
+            htmlFor={`todo-checkbox-${id}`}
             tabIndex={0}
           >
             {title}
@@ -143,7 +131,6 @@ const TodoItem = (props) => {
             className="first"
             title="Редактировать"
             aria-label="Редактировать"
-            id={id}
             onClick={handleEditClick}
             type="button"
           >
@@ -153,7 +140,6 @@ const TodoItem = (props) => {
             className="second"
             title="Удалить"
             aria-label="Удалить"
-            id={id}
             onClick={handleDeleteClick}
             type="button"
           >
