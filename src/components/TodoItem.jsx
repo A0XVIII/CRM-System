@@ -104,6 +104,7 @@ const TodoItem = (props) => {
               title="Подтвердить"
               aria-label="Подтвердить"
               type="submit"
+              style={{ background: "#4caf7d" }}
             >
               <CheckIcon />
             </button>
