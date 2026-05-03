@@ -13,12 +13,10 @@ const TodoItem = (props) => {
     title,
     isDone,
     updateTodos,
-    isEditing,
-    todos,
-    setEditingTodoId,
   } = props;
   const [error, setError] = useState("");
   const [newTodoTitle, setNewTodoTitle] = useState(title);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (!isEditing) {
@@ -39,14 +37,11 @@ const TodoItem = (props) => {
   const handleAdmitClick = async () => {
     const newTitle = newTodoTitle;
     if (!validateTodoTitle(newTitle, setError)) return;
-    const originalTodo = todos.find((todo) => todo.id === id);
-    const originalTitle = originalTodo.title;
 
-    if (originalTitle === newTitle) {
+    if (title === newTitle) {
       handleCloseClick();
       return;
     }
-    EditIcon;
     try {
       await updateTodo(id, {
         title: newTitle,
@@ -57,14 +52,14 @@ const TodoItem = (props) => {
       await updateTodos();
     } catch (error) {
       alert("Не удалось отредактировать задачу. Пожалуйста, попробуйте снова.");
-      handleEditClick(id);
+      handleEditClick();
       await updateTodos();
     }
   };
 
   const handleCloseClick = () => {
     setNewTodoTitle(title);
-    setEditingTodoId(null);
+    setIsEditing(false);
   };
 
   const handleDeleteClick = async () => {
@@ -92,22 +87,14 @@ const TodoItem = (props) => {
   };
 
   const handleEditClick = (todoId) => {
-    setEditingTodoId(todoId);
+    setIsEditing(true);
   };
-
-  const currentTodo = todos.find((todo) => todo.id === id) || {
-    title,
-    isDone,
-  };
-  const displayTitle = currentTodo.title;
-  const displayIsDone = currentTodo.isDone;
-
   return (
     <li className={`todo-item ${className}`}>
       <input
         type="checkbox"
         id={id}
-        checked={displayIsDone}
+        checked={isDone}
         className="todo-item_checkbox"
         onChange={handleToggleComplete}
       />
@@ -146,18 +133,18 @@ const TodoItem = (props) => {
       ) : (
         <>
           <label
-            className={`todo-item_label ${displayIsDone ? "completed" : ""}`}
+            className={`todo-item_label ${isDone ? "completed" : ""}`}
             htmlFor={id}
             tabIndex={0}
           >
-            {displayTitle}
+            {title}
           </label>
           <button
             className="first"
             title="Редактировать"
             aria-label="Редактировать"
             id={id}
-            onClick={() => handleEditClick(id)}
+            onClick={handleEditClick}
             type="button"
           >
             <EditIcon />

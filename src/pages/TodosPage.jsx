@@ -12,7 +12,6 @@ const TodosPage = () => {
   });
   const [currentFilter, setCurrentFilter] = useState("all");
   const [todos, setTodos] = useState([]);
-  const [editingTodoId, setEditingTodoId] = useState(null);
 
   const updateTodos = async () => {
     try {
@@ -45,8 +44,6 @@ const TodosPage = () => {
       />
       <TodoList
         todos={todos}
-        editingTodoId={editingTodoId}
-        setEditingTodoId={setEditingTodoId}
         updateTodos={updateTodos}
       />
     </div>

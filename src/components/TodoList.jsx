@@ -1,11 +1,6 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = ({
-  todos = [],
-  editingTodoId,
-  setEditingTodoId,
-  updateTodos,
-}) => {
+const TodoList = ({ todos = [], updateTodos }) => {
   if (todos.length === 0) {
     return <p>Задач нет</p>;
   }
@@ -17,10 +12,7 @@ const TodoList = ({
           className="todo_item"
           key={todo.id}
           {...todo}
-          isEditing={editingTodoId === todo.id}
-          setEditingTodoId={setEditingTodoId}
           updateTodos={updateTodos}
-          todos={todos}
         />
       ))}
     </ul>
